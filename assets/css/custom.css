@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+/* Custom Animations for Lab 10 */
+
+/* Animation 1: Color-shifting gradient pulse for badges/tags */
+@keyframes gradient-pulse {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animation 2: Vertical float with opacity for service items */
+@keyframes float-bounce {
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.9; }
+  50% { transform: translateY(-15px) scale(1.05); opacity: 1; }
+}
+
+/* Apply gradient-pulse to section headings */
+.section-title h1, .section-title h2 {
+  background: linear-gradient(90deg, #22e7a1, #667eea, #764ba2, #22e7a1);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-pulse 4s ease infinite;
+}
+
+/* Apply float-bounce to service items */
+.service-item, .portfolio-item {
+  animation: float-bounce 3s ease-in-out infinite;
+}
+
+/* Accessibility: Respect user motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Preloader spinner animation */
+@keyframes spin-loader {
+  to { transform: rotate(360deg); }
+}
+
+.preloader-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #25303f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.preloader-wrapper.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 4px solid rgba(34, 231, 161, 0.2);
+  border-top-color: #22e7a1;
+  border-right-color: #22e7a1;
+  border-radius: 50%;
+  animation: spin-loader 0.8s linear infinite;
+}
+
+/* Pulsing dots loader animation */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.loader-dots {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader-dots .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #22e7a1;
+  animation: pulse-dot 1.2s ease-in-out infinite;
+}
+
+.loader-dots .dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.loader-dots .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
