@@ -50,9 +50,16 @@
    */
   const preloader = document.querySelector('.preloader-wrapper');
   if (preloader) {
+    // Hide on page load
     window.addEventListener('load', () => {
       preloader.classList.add('hidden');
     });
+    // Fallback: hide after 3 seconds if load event doesn't fire
+    setTimeout(() => {
+      if (preloader && !preloader.classList.contains('hidden')) {
+        preloader.classList.add('hidden');
+      }
+    }, 3000);
   }
 
   /**
