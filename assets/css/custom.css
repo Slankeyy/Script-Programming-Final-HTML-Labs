@@ -1,21 +1,17 @@
 @charset "UTF-8";
 
-/* Custom Animations for Lab 10 */
-
-/* Animation 1: Color-shifting gradient pulse for badges/tags */
 @keyframes gradient-pulse {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Animation 2: Vertical float with opacity for service items */
+
 @keyframes float-bounce {
   0%, 100% { transform: translateY(0) scale(1); opacity: 0.9; }
   50% { transform: translateY(-15px) scale(1.05); opacity: 1; }
 }
 
-/* Apply gradient-pulse to section headings */
 .section-title h1, .section-title h2 {
   background: linear-gradient(90deg, #22e7a1, #667eea, #764ba2, #22e7a1);
   background-size: 200% 200%;
@@ -25,12 +21,12 @@
   animation: gradient-pulse 4s ease infinite;
 }
 
-/* Apply float-bounce to service items */
+
 .service-item, .portfolio-item {
   animation: float-bounce 3s ease-in-out infinite;
 }
 
-/* Accessibility: Respect user motion preferences */
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -41,7 +37,60 @@
   }
 }
 
-/* Preloader spinner animation */
+/* Animation 3: Animated gradient background */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.hero {
+  background: linear-gradient(-45deg, #667eea, #764ba2, #22e7a1, #f093fb);
+  background-size: 400% 400%;
+  animation: gradient-shift 8s ease infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animation 4: Floating circle */
+@keyframes float-circle {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-30px) rotate(180deg); }
+}
+
+/* Animation 5: Rotating triangle */
+@keyframes rotate-triangle {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Decorative shapes */
+.shape-circle {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, #FFD700, #FFA500);
+  border-radius: 50%;
+  animation: float-circle 4s ease-in-out infinite;
+  opacity: 0.8;
+}
+
+.shape-triangle {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  border-bottom: 52px solid #00FF88;
+  animation: rotate-triangle 6s linear infinite;
+  opacity: 0.8;
+}
+
+.shape-circle-1 { top: 5%; left: 10%; }
+.shape-circle-2 { top: 15%; right: 8%; animation-delay: 1s; }
+.shape-triangle-1 { bottom: 20%; left: 15%; animation-delay: 2s; }
+.shape-triangle-2 { bottom: 10%; right: 12%; animation-delay: 1.5s; }
+
 @keyframes spin-loader {
   to { transform: rotate(360deg); }
 }
@@ -78,7 +127,6 @@
   animation: spin-loader 0.8s linear infinite;
 }
 
-/* Pulsing dots loader animation */
 @keyframes pulse-dot {
   0%, 100% { opacity: 0.3; transform: scale(0.8); }
   50% { opacity: 1; transform: scale(1.2); }
