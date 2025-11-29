@@ -28,6 +28,7 @@
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
   <link href="assets/css/custom.css" rel="stylesheet">
+  <link href="assets/css/lab11.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: MyPage
@@ -873,45 +874,69 @@
                 <h3>Send us a message</h3>
               </div>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <form id="contactForm" class="contact-form">
 
                 <div class="row">
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Full Name</label>
-                      <input type="text" name="name" required="">
+                      <label>Name</label>
+                      <input type="text" name="name" required>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="form-group">
-                      <label>Email Address</label>
-                      <input type="email" name="email" required="">
+                      <label>Surname</label>
+                      <input type="text" name="surname" required>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Email</label>
+                      <input type="email" name="email" required>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Phone Number</label>
+                      <input type="tel" name="phone" placeholder="+370..." required>
                     </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label>Subject</label>
-                  <input type="text" name="subject" required="">
+                  <label>Address</label>
+                  <input type="text" name="address" required>
                 </div>
 
-                <div class="form-group">
-                  <label for="projectMessage">Message</label>
-                  <textarea name="message" id="projectMessage" rows="5" required=""></textarea>
+                <div class="rating-group">
+                  <label>Rating Question 1 (1-10)</label>
+                  <div class="rating-inputs">
+                    <input type="number" name="rating1" min="1" max="10" required>
+                  </div>
                 </div>
 
-                <div class="my-3">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                <div class="rating-group">
+                  <label>Rating Question 2 (1-10)</label>
+                  <div class="rating-inputs">
+                    <input type="number" name="rating2" min="1" max="10" required>
+                  </div>
                 </div>
 
-                <button type="submit" class="submit-btn">
-                  <span>Send Message</span>
-                  <i class="bi bi-arrow-right"></i>
-                </button>
+                <div class="rating-group">
+                  <label>Rating Question 3 (1-10)</label>
+                  <div class="rating-inputs">
+                    <input type="number" name="rating3" min="1" max="10" required>
+                  </div>
+                </div>
+
+                <button type="submit" class="submit-btn">Submit</button>
 
               </form>
+
+              <div id="formResults" class="form-results"></div>
 
             </div>
 
@@ -921,6 +946,16 @@
       </div>
 
     </section><!-- /Contact Section -->
+
+  <!-- Success Popup Overlay -->
+  <div id="popupOverlay" class="popup-overlay"></div>
+  
+  <!-- Success Popup -->
+  <div id="successPopup" class="success-popup">
+    <h3>✓ Form Submitted Successfully!</h3>
+    <p>Your information has been received and processed.</p>
+    <button>Close</button>
+  </div>
 
   </main>
 
@@ -967,6 +1002,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/lab11.js"></script>
 
 </body>
 

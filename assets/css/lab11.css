@@ -1,0 +1,198 @@
+/* Lab 11: JavaScript Forms - Custom Styling */
+
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #22e7a1;
+  box-shadow: 0 0 5px rgba(34, 231, 161, 0.3);
+}
+
+/* Error styling */
+.form-group.error input,
+.form-group.error textarea {
+  border-color: #dc3545;
+}
+
+.error-text {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  display: none;
+}
+
+.form-group.error .error-text {
+  display: block;
+}
+
+/* Rating inputs */
+.rating-group {
+  margin-bottom: 1.5rem;
+}
+
+.rating-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.rating-inputs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.rating-inputs input[type="number"] {
+  width: 60px;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(90deg, #22e7a1, #667eea);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.submit-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.submit-btn:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+/* Results display */
+.form-results {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 4px;
+  display: none;
+}
+
+.form-results.show {
+  display: block;
+}
+
+.form-results-item {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.average-rating {
+  margin-top: 1rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.rating-red {
+  color: #dc3545;
+}
+
+.rating-orange {
+  color: #fd7e14;
+}
+
+.rating-green {
+  color: #28a745;
+}
+
+/* Success popup */
+.success-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  z-index: 1000;
+  display: none;
+  animation: popupSlide 0.3s ease;
+}
+
+.success-popup.show {
+  display: block;
+}
+
+.success-popup h3 {
+  color: #28a745;
+  margin-bottom: 1rem;
+}
+
+.success-popup button {
+  background: #22e7a1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 999;
+}
+
+.popup-overlay.show {
+  display: block;
+}
+
+@keyframes popupSlide {
+  from {
+    transform: translate(-50%, -60%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
