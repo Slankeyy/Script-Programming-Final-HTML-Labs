@@ -874,55 +874,78 @@
                 <h3>Send us a message</h3>
               </div>
 
-              <form id="contactForm11" class="contact-form">
+              <form id="contactForm">
 
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="name11">Name</label>
-                    <input type="text" id="name11" name="name" required>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="name">Name</label>
+                      <input type="text" id="name" required>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="surname11">Surname</label>
-                    <input type="text" id="surname11" name="surname" required>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="surname">Surname</label>
+                      <input type="text" id="surname" required>
+                    </div>
                   </div>
                 </div>
 
-                <div class="form-row">
-                  <div class="form-group">
-                    <label for="email11">Email</label>
-                    <input type="email" id="email11" name="email" required>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" required>
+                    </div>
                   </div>
-                  <div class="form-group">
-                    <label for="phone11">Phone Number</label>
-                    <input type="text" id="phone11" name="phone" placeholder="+370 6xx xxxxx" required>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label for="phone">Phone Number</label>
+                      <input type="text" id="phone" placeholder="+370 6xx xxxxx" required>
+                    </div>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="address11">Address</label>
-                  <input type="text" id="address11" name="address" required>
+                  <label for="address">Address</label>
+                  <input type="text" id="address" required>
                 </div>
 
                 <div class="form-group">
                   <label for="rating1">How satisfied are you? (1-10)</label>
-                  <input type="number" id="rating1" name="rating1" min="1" max="10" required>
+                  <div class="rating-group">
+                    <input type="range" id="rating1" min="1" max="10" value="5">
+                    <span class="rating-value" id="rating1-value">5</span>
+                  </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="rating2">How would you rate the service? (1-10)</label>
-                  <input type="number" id="rating2" name="rating2" min="1" max="10" required>
+                  <label for="rating2">How likely to recommend? (1-10)</label>
+                  <div class="rating-group">
+                    <input type="range" id="rating2" min="1" max="10" value="5">
+                    <span class="rating-value" id="rating2-value">5</span>
+                  </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="rating3">Would you recommend us? (1-10)</label>
-                  <input type="number" id="rating3" name="rating3" min="1" max="10" required>
+                  <label for="rating3">Overall experience? (1-10)</label>
+                  <div class="rating-group">
+                    <input type="range" id="rating3" min="1" max="10" value="5">
+                    <span class="rating-value" id="rating3-value">5</span>
+                  </div>
                 </div>
 
-                <button type="submit" id="submitBtn11" class="submit-btn">Submit</button>
+                <button type="submit" id="submitBtn" class="submit-btn">Submit</button>
 
               </form>
 
               <div id="formResults"></div>
+
+              <div id="successPopup">
+                <span class="close-popup" id="closePopup">&times;</span>
+                <h3>✓ Form Submitted Successfully!</h3>
+                <p>Thank you for your submission. We'll be in touch soon.</p>
+              </div>
 
             </div>
 
