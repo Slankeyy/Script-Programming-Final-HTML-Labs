@@ -1,226 +1,277 @@
-class ContactFormHandler {
-  constructor() {
-    this.form = document.getElementById('contactForm');
-    this.resultsDiv = document.getElementById('formResults');
-    this.successPopup = document.getElementById('successPopup');
-    this.closeBtn = document.querySelector('.popup-close');
-    
-    if (this.form) {
-      this.form.addEventListener('submit', (e) => this.handleSubmit(e));
-      this.setupRealTimeValidation();
-    }
-    
-    if (this.closeBtn) {
-      this.closeBtn.addEventListener('click', () => this.hidePopup());
-    }
+// Lab 11: JavaScript Forms - Form handling and validation
+
+(function() {
+  'use strict';
+
+  // Form elements
+  const form = document.getElementById('contactForm');
+  const submitBtn = document.querySelector('.submit-btn');
+  const resultsDiv = document.getElementById('formResults');
+  const successPopup = document.querySelector('.success-popup');
+  const popupOverlay = document.querySelector('.popup-overlay');
+  const closePopupBtn = document.querySelector('.popup-close');
+
+  // Form fields
+  const fields = {
+    name: document.getElementById('name'),
+    surname: document.getElementById('surname'),
+    email: document.getElementById('email'),
+    phone: document.getElementById('phone'),
+    address: document.getElementById('address'),
+    rating1: document.getElementById('rating1'),
+    rating2: document.getElementById('rating2'),
+    rating3: document.getElementById('rating3')
+  };
+
+  // Validation regex patterns
+  const patterns = {
+    name: /^[a-zA-Z\s]+$/,
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+    phone: /^(\+370|0)[0-9]{8,9}$/,
+    address: /^.{5,}$/
+  };
+
+  // Real-time validation for optional task
+  if (fields.name) {
+    fields.name.addEventListener('blur', () => validateField(fields.name, 'name'));
+    fields.name.addEventListener('input', () => validateField(fields.name, 'name'));
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
-
-    const formData = {
-      name: document.getElementById('name').value.trim(),
-      surname: document.getElementById('surname').value.trim(),
-      email: document.getElementById('email').value.trim(),
-      phone: document.getElementById('phone').value.trim(),
-      address: document.getElementById('address').value.trim(),
-      rating1: parseInt(document.getElementById('rating1').value),
-      rating2: parseInt(document.getElementById('rating2').value),
-      rating3: parseInt(document.getElementById('rating3').value),
-    };
-
-    // Validate form
-    if (!this.validateForm(formData)) {
-      return;
-    }
-
-    // Calculate average rating
-    const avgRating = (formData.rating1 + formData.rating2 + formData.rating3) / 3;
-
-    // Display results
-    this.displayResults(formData, avgRating);
-
-    // Log to console
-    console.log('Form Data:', formData);
-    console.log('Average Rating:', avgRating.toFixed(1));
-
-    // Show success popup
-    this.showPopup();
-
-    // Reset form
-    this.form.reset();
+  if (fields.surname) {
+    fields.surname.addEventListener('blur', () => validateField(fields.surname, 'surname'));
+    fields.surname.addEventListener('input', () => validateField(fields.surname, 'surname'));
   }
 
-  validateForm(data) {
-    const errors = [];
-    
-    if (!data.name || !data.name.match(/^[a-zA-Z\s]+$/)) {
-      errors.push('Name must contain only letters');
-    }
-    if (!data.surname || !data.surname.match(/^[a-zA-Z\s]+$/)) {
-      errors.push('Surname must contain only letters');
-    }
-    if (!data.email || !data.email.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-      errors.push('Invalid email format');
-    }
-    if (!data.phone || !data.phone.match(/^\+?370\s?\d{1,2}\s?\d{3}\s?\d{4}$|^\+?370\d{9}$/)) {
-      errors.push('Invalid phone format');
-    }
-    if (!data.address || data.address.length < 5) {
-      errors.push('Address must be at least 5 characters');
-    }
-
-    if (errors.length > 0) {
-      alert(errors.join('\n'));
-      return false;
-    }
-    return true;
+  if (fields.email) {
+    fields.email.addEventListener('blur', () => validateField(fields.email, 'email'));
+    fields.email.addEventListener('input', () => validateField(fields.email, 'email'));
   }
 
-  displayResults(data, avgRating) {
-    const ratingColor = this.getRatingColor(avgRating);
-    
-    const resultsHTML = `
-      <div class="results-container">
-        <h4>Form Results:</h4>
-        <p><strong>Name:</strong> ${data.name}</p>
-        <p><strong>Surname:</strong> ${data.surname}</p>
-        <p><strong>Email:</strong> ${data.email}</p>
-        <p><strong>Phone number:</strong> ${data.phone}</p>
-        <p><strong>Address:</strong> ${data.address}</p>
-        <p><strong>Question 1 Rating:</strong> ${data.rating1}/10</p>
-        <p><strong>Question 2 Rating:</strong> ${data.rating2}/10</p>
-        <p><strong>Question 3 Rating:</strong> ${data.rating3}/10</p>
-        <p class="average-rating"><strong>${data.name} ${data.surname}: <span class="${ratingColor}">${avgRating.toFixed(1)}</span></strong></p>
-      </div>
-    `;
-    
-    this.resultsDiv.innerHTML = resultsHTML;
+  if (fields.phone) {
+    fields.phone.addEventListener('input', maskPhoneNumber);
   }
 
-  getRatingColor(rating) {
-    if (rating < 4) return 'rating-red';
-    if (rating < 7) return 'rating-orange';
-    return 'rating-green';
+  if (fields.address) {
+    fields.address.addEventListener('blur', () => validateField(fields.address, 'address'));
+    fields.address.addEventListener('input', () => validateField(fields.address, 'address'));
   }
 
-  showPopup() {
-    if (this.successPopup) {
-      this.successPopup.style.display = 'block';
-    }
-  }
-
-  hidePopup() {
-    if (this.successPopup) {
-      this.successPopup.style.display = 'none';
-    }
-  }
-
-  setupRealTimeValidation() {
-    const nameField = document.getElementById('name');
-    const surnameField = document.getElementById('surname');
-    const emailField = document.getElementById('email');
-    const phoneField = document.getElementById('phone');
-    const addressField = document.getElementById('address');
-    const submitBtn = document.querySelector('button[type="submit"]');
-
-    // Setup rating sliders
-    const rating1 = document.getElementById('rating1');
-    const rating2 = document.getElementById('rating2');
-    const rating3 = document.getElementById('rating3');
-
-    if (rating1) {
-      rating1.addEventListener('input', (e) => {
-        document.getElementById('rating1Value').textContent = e.target.value;
-      });
-    }
-    if (rating2) {
-      rating2.addEventListener('input', (e) => {
-        document.getElementById('rating2Value').textContent = e.target.value;
-      });
-    }
-    if (rating3) {
-      rating3.addEventListener('input', (e) => {
-        document.getElementById('rating3Value').textContent = e.target.value;
-      });
-    }
-
-    const validateField = (field, pattern, minLength = 0) => {
-      const isValid = field.value.trim().length >= minLength && pattern.test(field.value.trim());
-      field.classList.toggle('input-error', !isValid);
-      this.updateSubmitButton(submitBtn);
-      return isValid;
-    };
-
-    if (nameField) nameField.addEventListener('input', () => {
-      validateField(nameField, /^[a-zA-Z\s]*$/, 1);
-    });
-
-    if (surnameField) surnameField.addEventListener('input', () => {
-      validateField(surnameField, /^[a-zA-Z\s]*$/, 1);
-    });
-
-    if (emailField) emailField.addEventListener('input', () => {
-      validateField(emailField, /^[^\s@]*@?[^\s@]*\.?[^\s@]*$/, 0);
-    });
-
-    if (phoneField) phoneField.addEventListener('input', (e) => {
-      this.formatPhone(e);
-      validateField(phoneField, /^\+?370\s?\d{1,2}\s?\d{3}\s?\d{4}$|^\+?370\d{9}$/, 0);
-    });
-
-    if (addressField) addressField.addEventListener('input', () => {
-      validateField(addressField, /^.{5,}$/, 5);
+  // Update rating display values
+  if (fields.rating1) {
+    fields.rating1.addEventListener('input', (e) => {
+      document.getElementById('rating1-value').textContent = e.target.value;
     });
   }
 
-  formatPhone(e) {
-    let value = e.target.value.replace(/\D/g, '');
-    
-    if (!value.startsWith('370')) {
-      if (value.startsWith('370')) {
-        // Already correct
-      } else if (value.startsWith('70')) {
-        value = '3' + value;
-      } else if (!value.startsWith('3')) {
-        value = '370' + value;
+  if (fields.rating2) {
+    fields.rating2.addEventListener('input', (e) => {
+      document.getElementById('rating2-value').textContent = e.target.value;
+    });
+  }
+
+  if (fields.rating3) {
+    fields.rating3.addEventListener('input', (e) => {
+      document.getElementById('rating3-value').textContent = e.target.value;
+    });
+  }
+
+  // Form submission
+  if (form) {
+    form.addEventListener('submit', handleSubmit);
+  }
+
+  // Close popup button
+  if (closePopupBtn) {
+    closePopupBtn.addEventListener('click', closePopup);
+  }
+
+  // Validate individual field
+  function validateField(field, type) {
+    const value = field.value.trim();
+    let isValid = true;
+    let errorMessage = '';
+
+    if (!value) {
+      isValid = false;
+      errorMessage = 'This field is required';
+    } else {
+      switch (type) {
+        case 'name':
+        case 'surname':
+          if (!patterns.name.test(value)) {
+            isValid = false;
+            errorMessage = 'Only letters are allowed';
+          }
+          break;
+        case 'email':
+          if (!patterns.email.test(value)) {
+            isValid = false;
+            errorMessage = 'Invalid email format';
+          }
+          break;
+        case 'phone':
+          if (!patterns.phone.test(value.replace(/\s/g, '').replace(/-/g, ''))) {
+            isValid = false;
+            errorMessage = 'Invalid Lithuanian phone number';
+          }
+          break;
+        case 'address':
+          if (!patterns.address.test(value)) {
+            isValid = false;
+            errorMessage = 'Address must be at least 5 characters';
+          }
+          break;
       }
     }
 
-    if (value.length > 12) {
-      value = value.substring(0, 12);
+    const fieldGroup = field.closest('.form-group');
+    const errorText = fieldGroup.querySelector('.error-text');
+
+    if (isValid) {
+      fieldGroup.classList.remove('error');
+      fieldGroup.classList.add('success');
+      if (errorText) errorText.textContent = '';
+    } else {
+      fieldGroup.classList.remove('success');
+      fieldGroup.classList.add('error');
+      if (errorText) errorText.textContent = errorMessage;
     }
 
-    if (value.length >= 3) {
-      value = '+' + value.substring(0, 3) + ' ' + value.substring(3, 5) + ' ' + value.substring(5, 8) + ' ' + value.substring(8);
+    updateSubmitButton();
+    return isValid;
+  }
+
+  // Phone number masking (+370 6xx xxxxx format)
+  function maskPhoneNumber(e) {
+    let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
+
+    if (value.length > 0) {
+      if (!value.startsWith('370') && !value.startsWith('8')) {
+        if (value.startsWith('3')) {
+          value = '370' + value.substring(1);
+        } else {
+          value = '370' + value;
+        }
+      }
+
+      if (value.startsWith('8')) {
+        value = '370' + value.substring(1);
+      }
+
+      // Format: +370 6xx xxxxx
+      if (value.length > 0) {
+        value = '+' + value.slice(0, 3) + ' ' + value.slice(3, 4) + value.slice(4, 6) + ' ' + value.slice(6, 9) + ' ' + value.slice(9, 12);
+      }
     }
 
-    e.target.value = value.trim();
+    e.target.value = value;
   }
 
-  updateSubmitButton(btn) {
-    const isFormValid = this.isAllFieldsValid();
-    btn.disabled = !isFormValid;
+  // Update submit button state
+  function updateSubmitButton() {
+    if (!submitBtn) return;
+
+    const allValid = Object.keys(fields).every(key => {
+      const field = fields[key];
+      if (!field) return true;
+
+      if (key.startsWith('rating')) return true; // Ratings are always valid
+
+      const fieldGroup = field.closest('.form-group');
+      return fieldGroup && fieldGroup.classList.contains('success');
+    });
+
+    submitBtn.disabled = !allValid;
   }
 
-  isAllFieldsValid() {
-    const nameField = document.getElementById('name');
-    const surnameField = document.getElementById('surname');
-    const emailField = document.getElementById('email');
-    const phoneField = document.getElementById('phone');
-    const addressField = document.getElementById('address');
+  // Handle form submission
+  function handleSubmit(e) {
+    e.preventDefault();
 
-    return (
-      nameField && nameField.value.trim().match(/^[a-zA-Z\s]+$/) &&
-      surnameField && surnameField.value.trim().match(/^[a-zA-Z\s]+$/) &&
-      emailField && emailField.value.trim().match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/) &&
-      phoneField && phoneField.value.trim().match(/^\+?370\s?\d{1,2}\s?\d{3}\s?\d{4}$|^\+?370\d{9}$/) &&
-      addressField && addressField.value.trim().length >= 5
-    );
+    // Validate all fields
+    let allValid = true;
+    Object.keys(fields).forEach(key => {
+      const field = fields[key];
+      if (!field) return;
+      if (!key.startsWith('rating')) {
+        if (!validateField(field, key)) {
+          allValid = false;
+        }
+      }
+    });
+
+    if (!allValid) return;
+
+    // Collect form data
+    const formData = {
+      name: fields.name.value.trim(),
+      surname: fields.surname.value.trim(),
+      email: fields.email.value.trim(),
+      phone: fields.phone.value.trim(),
+      address: fields.address.value.trim(),
+      rating1: parseInt(fields.rating1.value),
+      rating2: parseInt(fields.rating2.value),
+      rating3: parseInt(fields.rating3.value)
+    };
+
+    // Log to console
+    console.log('Form Data:', formData);
+
+    // Calculate average rating
+    const avgRating = ((formData.rating1 + formData.rating2 + formData.rating3) / 3).toFixed(1);
+
+    // Display results
+    displayResults(formData, avgRating);
+
+    // Show success popup
+    showSuccessPopup();
   }
-}
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  new ContactFormHandler();
-});
+  // Display form results
+  function displayResults(data, avgRating) {
+    const resultsHTML = `
+      <h4>Submission Results:</h4>
+      <div class="result-item"><strong>Name:</strong> ${data.name}</div>
+      <div class="result-item"><strong>Surname:</strong> ${data.surname}</div>
+      <div class="result-item"><strong>Email:</strong> ${data.email}</div>
+      <div class="result-item"><strong>Phone number:</strong> ${data.phone}</div>
+      <div class="result-item"><strong>Address:</strong> ${data.address}</div>
+      <div class="average-rating">
+        <strong>${data.name} ${data.surname}:</strong>
+        <span class="value ${getAverageColor(avgRating)}">${avgRating}</span>
+      </div>
+    `;
+
+    resultsDiv.innerHTML = resultsHTML;
+    resultsDiv.classList.add('show');
+  }
+
+  // Get color for average rating
+  function getAverageColor(avg) {
+    avg = parseFloat(avg);
+    if (avg <= 4) return 'red';
+    if (avg <= 7) return 'orange';
+    return 'green';
+  }
+
+  // Show success popup
+  function showSuccessPopup() {
+    if (successPopup) {
+      successPopup.classList.add('show');
+    }
+    if (popupOverlay) {
+      popupOverlay.classList.add('show');
+    }
+  }
+
+  // Close popup
+  function closePopup() {
+    if (successPopup) {
+      successPopup.classList.remove('show');
+    }
+    if (popupOverlay) {
+      popupOverlay.classList.remove('show');
+    }
+  }
+
+})();
