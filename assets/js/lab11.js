@@ -14,25 +14,16 @@
   const rating1 = document.getElementById('lab11-rating1');
   const rating2 = document.getElementById('lab11-rating2');
   const rating3 = document.getElementById('lab11-rating3');
-  const rating1Value = document.getElementById('lab11-rating1-value');
-  const rating2Value = document.getElementById('lab11-rating2-value');
-  const rating3Value = document.getElementById('lab11-rating3-value');
 
-  // Update rating display values
+  // Update rating values on change (for number inputs)
   if (rating1) {
-    rating1.addEventListener('input', function() {
-      rating1Value.textContent = this.value;
-    });
+    rating1.addEventListener('change', updateSubmitButton);
   }
   if (rating2) {
-    rating2.addEventListener('input', function() {
-      rating2Value.textContent = this.value;
-    });
+    rating2.addEventListener('change', updateSubmitButton);
   }
   if (rating3) {
-    rating3.addEventListener('input', function() {
-      rating3Value.textContent = this.value;
-    });
+    rating3.addEventListener('change', updateSubmitButton);
   }
 
   // Form submission handler
@@ -204,6 +195,7 @@
 
   if (phoneInput) {
     phoneInput.addEventListener('input', function() {
+      // Remove all non-digits
       let value = this.value.replace(/\D/g, '');
       
       if (value.length === 0) {

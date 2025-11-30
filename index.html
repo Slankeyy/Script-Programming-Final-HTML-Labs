@@ -870,9 +870,7 @@
 
           <div class="col-lg-7">
             <div class="lab11-form-wrapper">
-              <div class="form-header">
-                <h3>Send us a message</h3>
-              </div>
+              <h3 style="color: #333; margin-bottom: 30px;">Send us a message</h3>
 
               <form id="lab11-contact-form">
 
@@ -901,7 +899,7 @@
                   <div class="col-md-6">
                     <div class="lab11-form-group">
                       <label for="lab11-phone">Phone number</label>
-                      <input type="tel" id="lab11-phone" name="phone" placeholder="+370 6XX XXX XX" required>
+                      <input type="text" id="lab11-phone" name="phone" placeholder="+370 6XX XXX XX" required>
                     </div>
                   </div>
                 </div>
@@ -911,22 +909,19 @@
                   <input type="text" id="lab11-address" name="address" required>
                 </div>
 
-                <div class="lab11-rating-group">
-                  <label for="lab11-rating1">Question 1 (1-10):</label>
-                  <input type="range" id="lab11-rating1" name="rating1" min="1" max="10" value="5">
-                  <span class="lab11-rating-value" id="lab11-rating1-value">5</span>
+                <div class="lab11-form-group">
+                  <label for="lab11-rating1">What do you think about my work? (1-10)</label>
+                  <input type="number" id="lab11-rating1" name="rating1" min="1" max="10" value="5" required>
                 </div>
 
-                <div class="lab11-rating-group">
-                  <label for="lab11-rating2">Question 2 (1-10):</label>
-                  <input type="range" id="lab11-rating2" name="rating2" min="1" max="10" value="5">
-                  <span class="lab11-rating-value" id="lab11-rating2-value">5</span>
+                <div class="lab11-form-group">
+                  <label for="lab11-rating2">How would you rate my communication? (1-10)</label>
+                  <input type="number" id="lab11-rating2" name="rating2" min="1" max="10" value="5" required>
                 </div>
 
-                <div class="lab11-rating-group">
-                  <label for="lab11-rating3">Question 3 (1-10):</label>
-                  <input type="range" id="lab11-rating3" name="rating3" min="1" max="10" value="5">
-                  <span class="lab11-rating-value" id="lab11-rating3-value">5</span>
+                <div class="lab11-form-group">
+                  <label for="lab11-rating3">Would you recommend me to others? (1-10)</label>
+                  <input type="number" id="lab11-rating3" name="rating3" min="1" max="10" value="5" required>
                 </div>
 
                 <button type="submit" class="lab11-submit-btn">SUBMIT</button>

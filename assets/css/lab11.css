@@ -21,8 +21,7 @@
 
 .lab11-form-group input[type="text"],
 .lab11-form-group input[type="email"],
-.lab11-form-group input[type="tel"],
-.lab11-form-group input[type="range"],
+.lab11-form-group input[type="number"],
 .lab11-form-group textarea {
   width: 100%;
   padding: 10px 12px;
@@ -37,7 +36,7 @@
 
 .lab11-form-group input[type="text"]:focus,
 .lab11-form-group input[type="email"]:focus,
-.lab11-form-group input[type="tel"]:focus,
+.lab11-form-group input[type="number"]:focus,
 .lab11-form-group textarea:focus {
   outline: none;
   border-color: #22e7a1;
@@ -56,61 +55,6 @@
   font-size: 12px;
   margin-top: 5px;
   font-weight: 600;
-}
-
-/* Rating slider styling */
-.lab11-rating-group {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  margin-bottom: 20px;
-}
-
-.lab11-rating-group label {
-  margin: 0;
-  min-width: 120px;
-  font-weight: 600;
-  color: #333;
-}
-
-.lab11-rating-group input[type="range"] {
-  flex: 1;
-  height: 6px;
-  border-radius: 3px;
-  background: linear-gradient(to right, #d32f2f, #f57c00, #388e3c);
-  outline: none;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.lab11-rating-group input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #22e7a1;
-  cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.lab11-rating-group input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #22e7a1;
-  cursor: pointer;
-  border: 2px solid white;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-}
-
-.lab11-rating-value {
-  min-width: 40px;
-  text-align: center;
-  font-weight: bold;
-  font-size: 16px;
-  color: #22e7a1;
 }
 
 /* Submit button */
