@@ -41,14 +41,6 @@
 
 <body class="index-page">
 
-  <!-- Success Popup -->
-  <div class="popup-overlay"></div>
-  <div class="success-popup">
-    <h3>✓ Form Submitted Successfully!</h3>
-    <p>Thank you for contacting us. We will get back to you soon.</p>
-    <button class="popup-close">Close</button>
-  </div>
-
   <!-- Preloader with Spinner Animation -->
   <div class="preloader-wrapper">
     <div class="loader-spinner"></div>
@@ -882,80 +874,55 @@
                 <h3>Send us a message</h3>
               </div>
 
-              <form id="contactForm">
+              <form id="contactForm11" class="contact-form">
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="name">Name</label>
-                      <input type="text" id="name" name="name" required>
-                      <div class="error-text"></div>
-                    </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="name11">Name</label>
+                    <input type="text" id="name11" name="name" required>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="surname">Surname</label>
-                      <input type="text" id="surname" name="surname" required>
-                      <div class="error-text"></div>
-                    </div>
+                  <div class="form-group">
+                    <label for="surname11">Surname</label>
+                    <input type="text" id="surname11" name="surname" required>
                   </div>
                 </div>
 
-                <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="email">Email Address</label>
-                      <input type="email" id="email" name="email" required>
-                      <div class="error-text"></div>
-                    </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label for="email11">Email</label>
+                    <input type="email" id="email11" name="email" required>
                   </div>
-                  <div class="col-md-6">
-                    <div class="form-group">
-                      <label for="phone">Phone Number</label>
-                      <input type="tel" id="phone" name="phone" placeholder="+370 6xx xxxxx" required>
-                      <div class="error-text"></div>
-                    </div>
+                  <div class="form-group">
+                    <label for="phone11">Phone Number</label>
+                    <input type="text" id="phone11" name="phone" placeholder="+370 6xx xxxxx" required>
                   </div>
                 </div>
 
                 <div class="form-group">
-                  <label for="address">Address</label>
-                  <input type="text" id="address" name="address" required>
-                  <div class="error-text"></div>
+                  <label for="address11">Address</label>
+                  <input type="text" id="address11" name="address" required>
                 </div>
 
                 <div class="form-group">
                   <label for="rating1">How satisfied are you? (1-10)</label>
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <input type="range" id="rating1" name="rating1" min="1" max="10" value="5">
-                    <span class="rating-value" id="rating1-value">5</span>
-                  </div>
+                  <input type="number" id="rating1" name="rating1" min="1" max="10" required>
                 </div>
 
                 <div class="form-group">
-                  <label for="rating2">How would you rate your experience? (1-10)</label>
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <input type="range" id="rating2" name="rating2" min="1" max="10" value="5">
-                    <span class="rating-value" id="rating2-value">5</span>
-                  </div>
+                  <label for="rating2">How would you rate the service? (1-10)</label>
+                  <input type="number" id="rating2" name="rating2" min="1" max="10" required>
                 </div>
 
                 <div class="form-group">
                   <label for="rating3">Would you recommend us? (1-10)</label>
-                  <div style="display: flex; align-items: center; gap: 10px;">
-                    <input type="range" id="rating3" name="rating3" min="1" max="10" value="5">
-                    <span class="rating-value" id="rating3-value">5</span>
-                  </div>
+                  <input type="number" id="rating3" name="rating3" min="1" max="10" required>
                 </div>
 
-                <button type="submit" class="submit-btn" disabled>
-                  <span>Send Message</span>
-                  <i class="bi bi-arrow-right"></i>
-                </button>
+                <button type="submit" id="submitBtn11" class="submit-btn">Submit</button>
 
               </form>
 
-              <div id="formResults" class="form-results"></div>
+              <div id="formResults"></div>
 
             </div>
 

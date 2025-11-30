@@ -1,26 +1,35 @@
-/* Lab 11: JavaScript Forms - CSS Styling */
+/* Lab 11: JavaScript Forms - Custom Styling */
+
+/* Form styling */
+.contact-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
 .form-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 500;
+  margin-bottom: 8px;
+  font-weight: 600;
   color: #333;
+  font-size: 14px;
 }
 
 .form-group input,
 .form-group textarea,
 .form-group select {
   width: 100%;
-  padding: 0.75rem;
-  border: 2px solid #ddd;
+  padding: 10px;
+  border: 2px solid #e0e0e0;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 14px;
   font-family: inherit;
-  transition: all 0.3s ease;
+  transition: border-color 0.3s;
 }
 
 .form-group input:focus,
@@ -28,105 +37,52 @@
 .form-group select:focus {
   outline: none;
   border-color: #22e7a1;
-  box-shadow: 0 0 5px rgba(34, 231, 161, 0.3);
+  box-shadow: 0 0 5px rgba(34, 231, 161, 0.2);
 }
 
-/* Validation styles */
-.form-group.error input,
-.form-group.error textarea,
-.form-group.error select {
-  border-color: #dc3545;
-  background-color: #fff5f5;
+/* Rating inputs */
+.rating-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
-.form-group.success input,
-.form-group.success textarea,
-.form-group.success select {
-  border-color: #28a745;
+.rating-group label {
+  margin-bottom: 0;
+  min-width: 120px;
 }
 
-.error-text {
-  color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
-  display: none;
+.rating-group input {
+  width: 60px;
+  padding: 8px;
+  text-align: center;
+  font-weight: 600;
 }
 
-.form-group.error .error-text {
-  display: block;
-}
-
-/* Rating input styles */
-.form-group input[type="range"] {
-  width: 100%;
-  height: 6px;
-  padding: 0;
-  cursor: pointer;
-}
-
-.rating-value {
-  display: inline-block;
-  background: #22e7a1;
-  color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.875rem;
-  margin-left: 0.5rem;
-}
-
-/* Results section */
-.form-results {
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: #f8f9fa;
+/* Form results */
+#formResults {
+  background: #f5f5f5;
+  padding: 20px;
   border-radius: 8px;
+  margin-top: 30px;
   display: none;
   border-left: 4px solid #22e7a1;
 }
 
-.form-results.show {
-  display: block;
-}
-
-.form-results h4 {
-  margin-bottom: 1rem;
+#formResults p {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.6;
   color: #333;
 }
 
-.result-item {
-  margin-bottom: 0.5rem;
-  color: #555;
-  font-size: 0.95rem;
-}
-
-.average-rating {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-top: 1rem;
-  padding-top: 1rem;
+#averageRating {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 15px;
+  padding-top: 15px;
   border-top: 1px solid #ddd;
-}
-
-.average-rating .value {
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  display: inline-block;
-}
-
-/* Color-coded average */
-.average-rating .value.red {
-  background-color: #dc3545;
-  color: white;
-}
-
-.average-rating .value.orange {
-  background-color: #fd7e14;
-  color: white;
-}
-
-.average-rating .value.green {
-  background-color: #28a745;
-  color: white;
 }
 
 /* Success popup */
@@ -135,112 +91,70 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background: white;
-  padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  z-index: 9999;
-  display: none;
-  text-align: center;
-  min-width: 300px;
-  border: 3px solid #28a745;
-}
-
-.success-popup.show {
-  display: block;
-}
-
-.success-popup h3 {
-  color: #28a745;
-  margin-bottom: 1rem;
-}
-
-.success-popup p {
-  color: #333;
-  margin-bottom: 1.5rem;
-}
-
-.success-popup button {
-  background: #28a745;
+  background: #4CAF50;
   color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
+  padding: 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  min-width: 300px;
 }
 
-.success-popup button:hover {
-  background: #218838;
-}
-
-/* Overlay for popup */
-.popup-overlay {
+.success-popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 9998;
+  z-index: 9999;
   display: none;
 }
 
-.popup-overlay.show {
+.success-popup-overlay.show {
   display: block;
 }
 
-/* Submit button styles */
+/* Submit button */
 .submit-btn {
-  background: #22e7a1;
-  color: #333;
-  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #22e7a1, #00d084);
+  color: white;
+  padding: 12px 30px;
   border: none;
   border-radius: 4px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.3s;
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
 }
 
 .submit-btn:hover:not(:disabled) {
-  background: #1bc892;
   transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(34, 231, 161, 0.3);
 }
 
 .submit-btn:disabled {
-  background: #ccc;
-  color: #666;
+  opacity: 0.5;
   cursor: not-allowed;
-  opacity: 0.6;
 }
 
-/* Range slider styling */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: #ddd;
-  outline: none;
+/* Two column layout for form fields */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
 }
 
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #22e7a1;
-  cursor: pointer;
-}
-
-input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #22e7a1;
-  cursor: pointer;
-  border: none;
+@media (max-width: 768px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
 }
